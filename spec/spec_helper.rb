@@ -4,7 +4,7 @@ require 'pry'
 require 'active_support/all'
 require 'uri'
 
-# initialize the library by getting paymill's api key from the envirounent variables
+# initialize the library by getting paymill's api key from the environment variables
 Paymill.api_key = ENV['PAYMILL_API_TEST_PRIVATE_KEY']
 
 # VCR basic configuration
