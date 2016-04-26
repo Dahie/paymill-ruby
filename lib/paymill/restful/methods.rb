@@ -13,7 +13,7 @@ module Paymill
           arguments = ''
         end
 
-        api_key = Paymill.api_key( arguments[:division] || :default )
+        api_key = Paymill.api_key( arguments.delete(:division) || :default )
         payload = Http.all( Restful.demodulize_and_tableize( name ), api_key, arguments )
         response = Paymill.request( payload, api_key )
         enrich_array_with_data_count( response['data'].map!{ |element| new( element ) }, response['data_count'] )
@@ -42,7 +42,7 @@ module Paymill
     module Create
       def create( arguments = {} )
         raise ArgumentError unless create_with?( arguments.keys )
-        api_key = Paymill.api_key( arguments[:division] || :default )
+        api_key = Paymill.api_key( arguments.delete(:division) || :default )
         payload = Http.post( Restful.demodulize_and_tableize( name ), api_key, Restful.normalize( arguments ) )
         response = Paymill.request( payload, api_key )
         new( response['data'] )
@@ -53,7 +53,7 @@ module Paymill
       def update( arguments = {} )
         arguments.merge! public_methods( false ).grep( /.*=/ ).map{ |m| m = m.id2name.chop; { m => send( m ) } }.reduce( :merge )
 
-        api_key = Paymill.api_key( arguments[:division] || :default )
+        api_key = Paymill.api_key( arguments.delete(:division) || :default )
         payload = Http.put( Restful.demodulize_and_tableize( self.class.name ), api_key, self.id, Restful.normalize( arguments ) )
         response = Paymill.request( payload, api_key )
         source = self.class.new( response['data'] )
@@ -63,7 +63,7 @@ module Paymill
 
     module Delete
       def delete( arguments = {} )
-        api_key = Paymill.api_key( arguments[:division] || :default )
+        api_key = Paymill.api_key( arguments.delete(:division) || :default )
         payload = Http.delete( Restful.demodulize_and_tableize( self.class.name ), api_key, self.id, arguments )
         response = Paymill.request( payload, api_key )
         return self.class.new( response['data'] ) if self.class.name.eql? 'Paymill::Subscription'
