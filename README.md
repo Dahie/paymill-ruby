@@ -52,6 +52,8 @@ require 'paymill'
 Paymill.api_key = ENV['PAYMILL_API_TEST_PRIVATE_KEY']
 ```
 
+If you need to manage multiple divisions with different secret api keys of multiple Paymill accounts, see below.
+
 Clients
 -------
 
@@ -200,6 +202,25 @@ Checksum.create( checksum_type: 'paypal', amount: 9700, currency: 'EUR', descrip
 
 ```ruby
 Checksum.create( checksum_type: 'paypal', amount: 9700, currency: 'EUR', description: 'Chuck Testa', return_url: 'https://testa.com', cancel_url: 'https://test.com/cancel', fee_amount: 100, fee_payment: 'pay_3af44644dd6d25c820a8', fee_currency: 'EUR', app_id: '8fh98hfd828ej2e09dk0hf9' )
+```
+
+Multiple Paymill accounts support
+=================================
+
+It is also possible to add multiple divisions, if you need to access multiple Paymill accounts.
+
+```ruby
+require 'paymill'
+
+Paymill.add_api_key( 'division_1', 'PRIVATE API KEY DIVISION 1' )
+Paymill.add_api_key( 'division_2', 'PRIVATE API KEY DIVISION 2' )
+```
+
+You access each division by passing the division's key to the query:
+
+```ruby
+clients = Paymill::Client.all( division: 'division_1' )
+offer = Offer.find( 'offer_b54ff8b3811e06c02e14', division: 'division_2' )
 ```
 
 Contributing

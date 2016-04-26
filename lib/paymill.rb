@@ -26,20 +26,26 @@ module Paymill
   autoload :Transaction,          'paymill/models/transaction'
   autoload :Webhook,              'paymill/models/webhook'
 
+  @@api_keys = {}
+
   def self.api_version
     API_VERSION
   end
 
-  def self.api_key
-    @@api_key
+  def self.api_key(slug = :default)
+    @@api_keys[slug]
   end
 
   def self.api_key=( api_key )
-    @@api_key = api_key
+    @@api_keys[:default] = api_key
   end
 
-  def self.request( payload )
-    raise AuthenticationError unless Paymill.api_key
+  def self.add_api_key(slug, api_key)
+    @@api_keys[slug]= api_key
+  end
+
+  def self.request( payload, api_key )
+    raise AuthenticationError unless api_key
     https ||= Net::HTTP.new( API_BASE, Net::HTTP.https_default_port)
     https.use_ssl = true
 
