@@ -14,7 +14,6 @@ module Paymill
         end
 
         api_key = Paymill.api_key( arguments[:division] || :default )
-        puts Paymill.api_key( :default )
         payload = Http.all( Restful.demodulize_and_tableize( name ), api_key, arguments )
         response = Paymill.request( payload, api_key )
         enrich_array_with_data_count( response['data'].map!{ |element| new( element ) }, response['data_count'] )
