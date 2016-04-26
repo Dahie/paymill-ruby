@@ -9,7 +9,7 @@ module Paymill
 
     protected
     def self.allowed_arguments
-      [:token, :client]
+      [:token, :client, :division]
     end
 
     def self.mandatory_arguments

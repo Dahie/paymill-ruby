@@ -15,7 +15,7 @@ module Paymill
     end
 
     def self.allowed_arguments
-      [:amount, :currency, :description]
+      [:amount, :currency, :description, :division]
     end
 
     def self.mutual_excluded_arguments

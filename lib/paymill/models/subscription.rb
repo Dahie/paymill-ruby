@@ -103,7 +103,7 @@ module Paymill
     end
 
     def self.allowed_arguments
-      [:offer, :payment, :client, :amount, :currency, :interval, :name, :period_of_validity, :start_at, :mandate_reference]
+      [:offer, :payment, :client, :amount, :currency, :interval, :name, :period_of_validity, :start_at, :mandate_reference, :division]
     end
 
     def parse_timestamps

@@ -16,7 +16,7 @@ module Paymill
 
     protected
     def self.allowed_arguments
-      [:amount, :currency, :interval, :name, :trial_period_days]
+      [:amount, :currency, :interval, :name, :trial_period_days, :division]
     end
 
     def self.mandatory_arguments

@@ -13,7 +13,7 @@ module Paymill
     end
 
     def self.allowed_arguments
-      [:email, :description]
+      [:email, :description, :division]
     end
 
     def self.mandatory_arguments

@@ -15,7 +15,7 @@ module Paymill
     end
 
     def self.allowed_arguments
-      [:amount, :description]
+      [:amount, :description, :division]
     end
 
   end

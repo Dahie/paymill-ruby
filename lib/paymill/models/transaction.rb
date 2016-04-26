@@ -17,7 +17,7 @@ module Paymill
     end
 
     def self.allowed_arguments
-      [:amount, :client, :currency, :description, :preauthorization, :fee_amount, :fee_payment, :fee_currency, :mandate_reference]
+      [:amount, :client, :currency, :description, :preauthorization, :fee_amount, :fee_payment, :fee_currency, :mandate_reference, :division]
     end
 
     def self.mutual_excluded_arguments
