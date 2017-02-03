@@ -5,7 +5,8 @@ module Paymill
 
     def self.create( transaction, attributes = {} )
       raise ArgumentError unless create_with?( attributes.keys )
-      response = Paymill.request( Http.post( name.demodulize.tableize, transaction.id, Restful.normalize( attributes ) ) )
+      api_key  = Paymill.api_key( attributes.delete(:division) || :default )
+      response = Paymill.request( Http.post( name.demodulize.tableize, api_key, transaction.id, Restful.normalize( attributes ) ), api_key )
       new( response['data'] )
     end
 
